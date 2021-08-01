@@ -1,0 +1,365 @@
+swagger: "2.0"
+info:
+  title: "swagger Company"
+  description: "Company application api"
+  version:  "1.0.0"
+host: "localhost:8080"
+schemes:
+  - http
+tags:
+  - name: "Employees"
+    description: "every thing about employee"
+  - name: "Children"
+    description: "every thing about child"
+  - name: "Department"
+    description: "every thing about department"
+  - name: "Employeejob"
+    description: "every thing about employee job"
+
+paths:
+  /EmployeeDate:
+    post:
+      tags:
+        - "Employees"
+      summary: "save new employee "
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeData'
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/EmployeeData'
+    get:
+      tags:
+        - "Employees"
+      responses:
+        200:
+          description: ok
+
+  /EmployeeDate/{id}:
+    get:
+      tags:
+        - "Employees"
+      summary: get employee of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/EmployeeData'
+        400:
+          description: employee not found
+    put:
+      tags:
+        - "Employees"
+      summary: update employee of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeData'
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/EmployeeData'
+        404:
+          description: employee not found
+    delete:
+      tags:
+        - "Employees"
+      summary: delete employee of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/EmployeeData'
+        404:
+          description: employee not found
+
+  /employeeNoEachDepartment/{departmentId}:
+    get:
+      tags:
+          - "EmployeeNo"
+      summary: get the number of in each department
+      parameters:
+        - in: path
+          name: departmentId
+          required: true
+          type: integer
+      responses:
+          200:
+            description: ok
+            schema:
+              $ref: '#/definitions/EmployeeNo'
+          400:
+            description: not found employee
+  /employeeInAllDepartment:
+    get:
+      tags:
+        - "EmployeeNo"
+      summary: get the number of employee in all department
+      responses:
+        200:
+          description: ok
+
+
+  /childData:
+    post:
+      tags:
+        - "Children"
+      summary: save new child
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ChildData'
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/ChildData'
+    get:
+      tags:
+        - "Children"
+      summary: get all childrean
+      responses:
+        200:
+          description: ok
+
+  /childData/{id}:
+    get:
+      tags:
+        - "Children"
+      summary: get child of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: ok
+        400:
+          description: child not found
+    put:
+      tags:
+        - "Children"
+      summary: update child of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ComponyDepartment'
+      responses:
+          200:
+            description: ok
+          404:
+            description: child not found
+    delete:
+      tags:
+        - "Children"
+      summary: delete child of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+         200:
+           description: ok
+         404:
+          description: child not found
+
+  /department:
+    post:
+      tags:
+        - "Department"
+      summary: save new department
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ComponyDepartment'
+      responses:
+        200:
+          description: ok
+    get:
+      tags:
+        - "Department"
+      summary: get all department
+      responses:
+        200:
+          description: ok
+
+  /department/{id}:
+    get:
+      tags:
+        - "Department"
+      summary: get department of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: ok
+        400:
+          description: department not found
+    put:
+      tags:
+        - "Department"
+      summary: update department of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ComponyDepartment'
+      responses:
+           200:
+             description: ok
+           404:
+             description: department not found
+
+  /employeeJob:
+    post:
+      tags:
+        - "Employeejob"
+      summary: save new job of employee
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeJob'
+      responses:
+        200:
+          description: ok
+    get:
+      tags:
+        - "Employeejob"
+      summary: get all jobs of employee
+      responses:
+         200:
+           description: ok
+
+  /employeeJob/{id}:
+    get:
+      tags:
+        - "Employeejob"
+      summary: get job of employee of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: ok
+        400:
+          description: job of employee not found
+
+    put:
+      tags:
+        - "Employeejob"
+      summary: update job of employee of id
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          type: "integer"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeJob'
+      responses:
+        200:
+          description: ok
+        404:
+          description: job of employee not found
+
+
+
+definitions:
+  EmployeeData:
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      telephone:
+        type: string
+      mobile:
+        type: string
+      salary:
+        type: string
+      active:
+        type: boolean
+        example:
+          true
+      departmentId:
+        type: integer
+      jobId:
+        type: integer
+
+  EmployeeNo:
+    properties:
+      departmentName:
+        type: string
+      EmployeeNo:
+        type: integer
+
+  ChildData:
+    properties:
+      childName:
+        type: string
+      dateOfBirth:
+        type: string
+        example:
+          00-00-0000
+      Active:
+          type: boolean
+
+  ComponyDepartment:
+    properties:
+      departmentName:
+        type: string
+
+  EmployeeJob:
+    properties:
+      jobName:
+        type: string
+      jobDescription:
+        type: string
+
